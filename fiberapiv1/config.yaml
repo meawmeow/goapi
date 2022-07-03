@@ -1,0 +1,21 @@
+app:
+  port: 8000
+
+db:
+  driver: "mssql"
+  host: "127.0.0.1"
+  port: 1433
+  username: sa
+  password: 12345Cat
+  database: banking
+
+jwt:
+  secretKey: "secretKey"
+
+oAuth:
+  google :
+    clientID : "751924227636-106o4e5i3l2mpm5r01ofs0nnpp840pf6.apps.googleusercontent.com"
+    clientSecret : "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"
+  line : 
+    clientID : "1657215266"
+    clientSecret : "ee2697732bbf53ebbc1c7697f9604703"

@@ -1,0 +1,421 @@
+basePath: /
+definitions:
+  helper.Response:
+    properties:
+      data: {}
+      errors: {}
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+  models.OrdersRequest:
+    properties:
+      count:
+        type: integer
+      product_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+  models.ProductGroupRequest:
+    properties:
+      imageuri:
+        type: string
+      name:
+        type: string
+    type: object
+  models.ProductRequest:
+    properties:
+      imageuri:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      productGroup:
+        type: integer
+    type: object
+  models.UserRequest:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.UserResponse:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      token:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fiber KiwShop API
+  version: "1.0"
+paths:
+  /v1/api/imageprofile:
+    get:
+      consumes:
+      - '*/*'
+      description: GetImageProfile func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authorization
+  /v1/api/login:
+    post:
+      consumes:
+      - application/json
+      description: Login func
+      parameters:
+      - description: user data to be login
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UserResponse'
+      tags:
+      - Authorization
+  /v1/api/logout:
+    post:
+      consumes:
+      - '*/*'
+      description: Logout func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authorization
+  /v1/api/oauth/auth:
+    get:
+      consumes:
+      - '*/*'
+      description: Login with OAuth func
+      parameters:
+      - description: Provider example path /auth?provider=google
+        in: path
+        name: provider
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      tags:
+      - OAuth2.0
+  /v1/api/oauth/auth/callback:
+    get:
+      consumes:
+      - '*/*'
+      description: Provider callback func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      tags:
+      - OAuth2.0
+  /v1/api/oauth/logout:
+    get:
+      consumes:
+      - '*/*'
+      description: OAuth logout func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      tags:
+      - OAuth2.0
+  /v1/api/orders:
+    delete:
+      consumes:
+      - '*/*'
+      description: Get Orders By UserId func
+      parameters:
+      - description: id
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Orders
+    post:
+      consumes:
+      - '*/*'
+      description: Create Orders func
+      parameters:
+      - description: data to be insert orders
+        in: body
+        name: Orders
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrdersRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Orders
+  /v1/api/ordersall:
+    get:
+      consumes:
+      - '*/*'
+      description: Get All Orders func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Orders
+  /v1/api/ordersbyuserid:
+    get:
+      consumes:
+      - '*/*'
+      description: Get Orders By UserId func
+      parameters:
+      - description: userId
+        in: query
+        name: userId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Orders
+  /v1/api/product:
+    post:
+      consumes:
+      - '*/*'
+      description: Create Product func
+      parameters:
+      - description: data to be insert product
+        in: body
+        name: Product
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Product
+  /v1/api/productgroup:
+    post:
+      consumes:
+      - '*/*'
+      description: Create ProductGroup func
+      parameters:
+      - description: data to be insert product group
+        in: body
+        name: ProductGroup
+        required: true
+        schema:
+          $ref: '#/definitions/models.ProductGroupRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Product
+  /v1/api/productgroups:
+    get:
+      consumes:
+      - '*/*'
+      description: Get All ProductGroups func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Product
+  /v1/api/products:
+    get:
+      consumes:
+      - '*/*'
+      description: Get All Products func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Product
+  /v1/api/products/group:
+    get:
+      consumes:
+      - '*/*'
+      description: Get Products By GroupId func
+      parameters:
+      - description: groupId
+        in: path
+        name: groupId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Product
+  /v1/api/register:
+    post:
+      consumes:
+      - '*/*'
+      description: Register func
+      parameters:
+      - description: user data to be register
+        in: body
+        name: User
+        required: true
+        schema:
+          $ref: '#/definitions/models.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.Response'
+      tags:
+      - Authorization
+  /v1/api/uploadfile:
+    post:
+      consumes:
+      - '*/*'
+      description: UploadFile func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authorization
+  /v1/api/user/{id}:
+    get:
+      consumes:
+      - '*/*'
+      description: GetUser func
+      parameters:
+      - description: userId
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authorization
+  /v1/api/users:
+    get:
+      consumes:
+      - '*/*'
+      description: GetUser func
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+      security:
+      - ApiKeyAuth: []
+      tags:
+      - Authorization
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
