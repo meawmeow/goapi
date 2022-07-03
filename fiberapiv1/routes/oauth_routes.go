@@ -17,8 +17,8 @@ func OAuthProviderRoutesSetup(app *fiber.App) {
 			configs.GetGoogleClientSecret(),
 			"http://localhost:8000/v1/api/oauth/auth/callback"), //or http://localhost:8000/v1/api/oauth/auth/google/callback
 		// line.New(
-		// 	"1657138695",
-		// 	"05528203f76fc3e126316cbecd84cb49",
+		// 	"",
+		// 	"",
 		// 	"http://localhost:8000/v1/api/oauth/auth/line/callback", "profile", "openid", "email"),
 	)
 	oAuthHandler := handler.NewOAuthHandler()
