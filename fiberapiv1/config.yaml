@@ -14,8 +14,8 @@ jwt:
 
 oAuth:
   google :
-    clientID : "751924227636-106o4e5i3l2mpm5r01ofs0nnpp840pf6.apps.googleusercontent.com"
-    clientSecret : "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"
+    clientID : ""
+    clientSecret : ""
   line : 
-    clientID : "1657215266"
-    clientSecret : "ee2697732bbf53ebbc1c7697f9604703"
+    clientID : ""
+    clientSecret : ""
